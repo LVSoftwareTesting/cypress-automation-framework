@@ -1,0 +1,44 @@
+{
+  "name": "cypress-automation-framework",
+  "version": "1.0.0",
+  "description": "Cypress Cucumber Automation Framework",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "full-regression-headed-chrome": "cypress run --headed --browser chrome --spec 'cypress/e2e/*.feature' && node cucumber-html-report.js",
+    "full-regression-headless-chrome": "cypress run --browser chrome --spec 'cypress/e2e/*.feature' && node cucumber-html-report.js",
+    "contact-us-test-headed-chrome": "cypress run --headed --browser chrome --spec 'cypress/e2e/Contact_Us.feature' && node cucumber-html-report.js",
+    "contact-us-headed": "cypress run -e TAGS=\"@contact-us\" --headed && node cucumber-html-report.js",
+    "contact-us-headless": "cypress run -e TAGS=\"@contact-us\" && node cucumber-html-report.js",
+    "login-tests-headed": "cypress run -e TAGS=\"@login\" --headed && node cucumber-html-report.js",
+    "regression-tests-headed": "cypress run -e TAGS=\"@regression\" --headed && node cucumber-html-report.js",
+    "smoke-tests-headed": "cypress run -e TAGS=\"@smoke\" --headed && node cucumber-html-report.js",
+    "login-and-smoke-tests-headed": "cypress run -e TAGS=\"@smoke or @login\" --headed && node cucumber-html-report.js"
+  },
+  "author": "Lubomir V",
+  "license": "ISC",
+  "devDependencies": {
+    "@badeball/cypress-cucumber-preprocessor": "^17.1.0",
+    "@bahmutov/cypress-esbuild-preprocessor": "^2.2.0",
+    "cypress": "^12.6.0",
+    "cypress-xpath": "^2.0.1",
+    "multiple-cucumber-html-reporter": "^3.4.0",
+    "ts-loader": "^9.4.2"
+  },
+  "cypress-cucumber-preprocessor": {
+    "stepDefinitions": "cypress/support/step_definitions/**/*.js",
+    "html": {
+      "enabled": true,
+      "output": "cypress/reports/cucumber-html/cucumber-report.html"
+    },
+    "messages": {
+      "enabled": true,
+      "output": "cypress/reports/cucumber-ndjson/cucumber-report.ndjson"
+    },
+    "json": {
+      "enabled": true,
+      "formtatter": "cucumber-json-formatter",
+      "output": "cypress/reports/cucumber-json/cucumber-report.json"
+    }
+  }
+}
